@@ -2,6 +2,9 @@ import unifyOc.recUni as recUni
 
 
 class UnificationError(Exception):
+
+    msg: str
+
     def __int__(self, msg):
         self.msg = msg
         super().__init__(self.msg)
@@ -15,7 +18,7 @@ def apply_substitution(subR, term):
     are made according to rules
     """
 
-    if recUni.isFuncOList(term):
+    if recUni.isFuncOListType(term):
 
         return [apply_substitution(subR, e) for e in term]
     else:
@@ -32,7 +35,7 @@ def occur_check(variable, term):
     """
     if variable == term:
         return True
-    elif recUni.isFuncOList(term):
+    elif recUni.isFuncOListType(term):
         return any(occur_check(variable, sub_term) for sub_term in term)
     else:
         return False
@@ -44,7 +47,7 @@ def unify_with_occur_check(term1, term2):
         # if they are constant both or empty both they must equal
         if term1 == term2:
             return dict()
-        raise UnificationError("Constant terms are not equal.")
+        raise UnificationError("Constant terms or functions are not equal.")
 
     elif recUni.isVariable(term1):
         #   occur check

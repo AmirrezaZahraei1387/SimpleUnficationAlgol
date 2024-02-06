@@ -7,6 +7,9 @@ SEP_SP = [" "]
 
 
 class InputError(Exception):
+
+    msg: str
+
     def __int__(self, msg):
         self.msg = msg
         super().__init__(self.msg)
@@ -55,7 +58,7 @@ def parseInput(input_user: str):
                 res_resolved_input.append(list([pre]))
             else:
                 index_stack.append(len(res_resolved_input) - 1)
-                res_resolved_input.append(list())
+                res_resolved_input.append(list([" "]))
 
             pre_name = False
 
@@ -92,7 +95,35 @@ def printSubRules(subR: dict):
     :return: prints the substitution rules using equal sign between variable
     and the value it is assigned to.
     """
-    for key in subR:
-        print(key, "=", subR[key])
 
+    def printValue(value):
+
+        if recUni.isFuncOListType(value):
+
+            start = 0
+
+            if recUni.isFunction(value):
+                start = 1
+                print(value[0], end="")
+
+            last = False
+            print("(", end="")
+
+            for i in range(start, len(value), 1):
+                printValue(value[i])
+
+                if i == len(value) - 1:
+                    last = True
+
+                if not last:
+                    print(",", end="")
+
+            print(")", end="")
+        else:
+            print(value, end="")
+
+    for key in subR:
+        print(key, "=", end='')
+        printValue(subR[key])
+        print()
 
