@@ -1,4 +1,5 @@
 
+
 def isVariable(nameEntry: str):
     if isinstance(nameEntry, str):
         return nameEntry[0].isupper()

@@ -1,3 +1,47 @@
 import unifyOc
+import sys
 
-print(unifyOc.parseInput(input()))
+
+def main():
+
+    DESCRIPTION = """Important: Please make sure you use low letters for 
+constants, and functions and upper case for variables"""
+    print(DESCRIPTION)
+
+    exp1 = input("Please enter the expression: ")
+
+    try:
+        exp1 = unifyOc.parseInput(exp1)
+    except unifyOc.InputError as err:
+        print(err.msg)
+        sys.exit(1)
+
+    print("Expression 1 captured successfully!")
+
+    exp2 = input("Please enter the expression: ")
+    try:
+        exp2 = unifyOc.parseInput(exp2)
+    except unifyOc.InputError as err:
+        print(err.msg)
+        sys.exit(1)
+
+    print("Expression 2 captured successfully!")
+
+    try:
+        unify_result = unifyOc.unify_with_occur_check(exp1, exp2)
+    except unifyOc.UnificationError as error:
+        print(error.msg)
+        sys.exit(1)
+
+    print("substitution rules are:")
+    print(unify_result)
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+

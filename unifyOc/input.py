@@ -13,7 +13,11 @@ class InputError(Exception):
 
 
 def resolve_res_list(resolved_input: list, index_stack: list):
-
+    """
+    :param resolved_input: this is the list were input is parsed down into it
+    :param index_stack: a stack is used to save the inner lists positions
+    :return: return a reference to the current inner list to add, remove, etc
+    """
     e = resolved_input
 
     for i in index_stack:
@@ -24,8 +28,14 @@ def resolve_res_list(resolved_input: list, index_stack: list):
 
 def parseInput(input_user: str):
 
+    # the variables used to keep track of
+    # opening and closing parenthesis
     open_par = 0
     close_par = 0
+
+    # help to put the function name into its inter list
+    # by saying weather the previous name was constant or
+    # variable
     pre_name = False
 
     resolved_input = list()
@@ -74,5 +84,15 @@ def parseInput(input_user: str):
         raise InputError("Parenthesis are used incorrectly")
 
     return resolved_input
+
+
+def printSubRules(subR: dict):
+    """
+    :param subR: substitution rules
+    :return: prints the substitution rules using equal sign between variable
+    and the value it is assigned to.
+    """
+    for key in subR:
+        print(key, "=", subR[key])
 
 

@@ -41,6 +41,7 @@ def occur_check(variable, term):
 def unify_with_occur_check(term1, term2):
 
     if (recUni.isConstant(term1) and recUni.isConstant(term2)) or (term1 == [] and term2 == []):
+        # if they are constant both or empty both they must equal
         if term1 == term2:
             return dict()
         raise UnificationError("Constant terms are not equal.")
