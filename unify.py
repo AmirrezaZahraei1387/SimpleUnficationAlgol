@@ -19,6 +19,14 @@ def substitute(term1, term2):
         return term1.get(term2, term2)
 
 
+def check_subRules(subRule: dict, varToAdd: str):
+    """
+    :param subRule: substitution rules
+    :param varToAdd: variable that should be added
+    :return: return true if the varToAdd does not exist in subRules, false otherwise
+    """
+
+
 def occur_check(variable, term):
     """
     Check if a variable occurs in a term.
@@ -37,7 +45,7 @@ class UnificationError(Exception):
         super().__init__(self.msg)
 
 
-def unify(term1, term2):
+def unify_with_occur_check(term1, term2):
 
     if (isConstant(term1) and isConstant(term2)) or (term1 == [] and term2 == []):
         if term1 == term2:
@@ -60,21 +68,21 @@ def unify(term1, term2):
         raise UnificationError("Unification failed")
 
     else:
-        b1 = unify(term1[0], term2[0])
+        b1 = unify_with_occur_check(term1[0], term2[0])
 
         TE1 = [substitute(b1, e) for e in term1[1:]]
         TE2 = [substitute(b1, e) for e in term2[1:]]
-        b2 = unify(TE1, TE2)
+        b2 = unify_with_occur_check(TE1, TE2)
 
         b1.update(b2)
         return b1
 
 
-E1 = ["f", ["f", "X", "Y"], "X"]
-E2 = ["f", ["f", "V", "U"], ["g", "U", "Y"]]
+E1 = ["f", "X", "X"]
+E2 = ["f", "3", "4"]
 
 try:
-    subRules = unify(E1, E2)
+    subRules = unify_with_occur_check(E1, E2)
 except UnificationError:
     print("Unification Error.")
 else:
