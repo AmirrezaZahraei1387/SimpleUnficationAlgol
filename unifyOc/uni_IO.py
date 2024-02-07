@@ -53,11 +53,12 @@ def parseInput(input_user: str):
 
         elif c in OPENING_PAR_ORG:
             if pre_name:
+
                 index_stack.append(len(res_resolved_input) - 1)
                 pre = res_resolved_input.pop()
                 res_resolved_input.append(list([pre]))
             else:
-                index_stack.append(len(res_resolved_input) - 1)
+                index_stack.append(len(res_resolved_input))
                 res_resolved_input.append(list([" "]))
 
             pre_name = False
