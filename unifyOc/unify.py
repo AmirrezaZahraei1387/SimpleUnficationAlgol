@@ -43,7 +43,7 @@ def occur_check(variable, term):
 
 def unify_with_occur_check(term1, term2):
 
-    if (recUni.isConstant(term1) and recUni.isConstant(term2)) or (term1 == [] and term2 == []):
+    if (recUni.isConstant(term1, True) and recUni.isConstant(term2, True)) or (term1 == [] and term2 == []):
         # if they are constant both or empty both they must equal
         if term1 == term2:
             return dict()
@@ -62,7 +62,8 @@ def unify_with_occur_check(term1, term2):
         return {term2: term1}
 
     elif len(term1) != len(term2) or len(term1) == 0 or len(term2) == 0:
-        raise UnificationError("the number of elements in list or function parameter does not match.")
+        raise UnificationError("the number of elements in list or function parameter "
+                               "does not match or there dependency cycles.")
 
     else:
         b1 = unify_with_occur_check(term1[0], term2[0])

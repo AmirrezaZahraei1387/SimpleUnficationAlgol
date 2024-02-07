@@ -1,1 +1,4 @@
-# SimpleUnficationAlgol
+# SimpleUnificationAlgol
+
+## Goal
+

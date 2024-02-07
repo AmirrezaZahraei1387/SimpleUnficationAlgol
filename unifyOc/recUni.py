@@ -6,9 +6,9 @@ def isVariable(nameEntry: str):
     return False
 
 
-def isConstant(nameEntry: str):
+def isConstant(nameEntry: str, enableFuncCheck: bool = False):
     if isinstance(nameEntry, str):
-        return nameEntry[0].islower()
+        return nameEntry[0].islower() or (nameEntry[0] == ' ' and enableFuncCheck)
     return False
 
 

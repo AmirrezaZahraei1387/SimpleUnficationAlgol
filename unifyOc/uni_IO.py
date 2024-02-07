@@ -122,8 +122,11 @@ def printSubRules(subR: dict):
         else:
             print(value, end="")
 
-    for key in subR:
-        print(key, "=", end='')
-        printValue(subR[key])
-        print()
+    if len(subR) == 0:
+        print("No subRules found!")
+    else:
+        for key in subR:
+            print(key,"=", end='')
+            printValue(subR[key])
+            print()
 
