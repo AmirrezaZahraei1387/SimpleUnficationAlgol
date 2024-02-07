@@ -127,7 +127,7 @@ def printSubRules(subR: dict):
         print("No subRules found!")
     else:
         for key in subR:
-            print(key,"=", end='')
+            print(key, "= ", end='')
             printValue(subR[key])
             print()
 

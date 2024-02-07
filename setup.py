@@ -21,6 +21,6 @@ setup(
     ],
     keywords="Unification, unifier, substitution rule, substitution, predicate calculus, logic",
     author_email='mzahraei326@gmail.com',
-    url='https://github.com/AmirrezaZahraei1387/wifiPassword/blob/master/setup.py',
+    url='https://github.com/AmirrezaZahraei1387/SimpleUnficationAlgol',
     packages=setuptools.find_packages(),
 )
